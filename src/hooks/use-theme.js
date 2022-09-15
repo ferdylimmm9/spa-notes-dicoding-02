@@ -3,9 +3,16 @@ import * as React from "react";
 import ThemeContext from "../contexts/theme-context";
 
 export function ThemeProvider({ children }) {
-  const value = localStorage.getItem("theme");
-  const [theme, setTheme] = React.useState(value ? value : "light");
-  const themeHandler = () => setTheme(theme === "light" ? "darku" : "light");
+  const [theme, setTheme] = React.useState(
+    localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
+  );
+  const themeHandler = () => {
+    setTheme((prevTheme) => {
+      const newTheme = prevTheme === "dark" ? "light" : "dark";
+      localStorage.setItem("theme", newTheme);
+      return newTheme;
+    });
+  };
 
   const ThemeValue = React.useMemo(() => ({ theme, themeHandler }), [theme]);
 

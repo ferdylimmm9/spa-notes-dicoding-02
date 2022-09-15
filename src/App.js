@@ -1,23 +1,26 @@
 import * as React from "react";
-import { AddNote } from "./components/add-note";
 import LoginCard from "./components/login-card";
-import NoteCard from "./components/note-card";
 import RegisterCard from "./components/register-card";
+import { Routes, Route } from "react-router-dom";
+import { getAccessToken } from "./utils/api";
+import PageNotFound from "./pages/note-found-page";
+import Navigation from "./components/navigation";
 function App() {
+  const auth = getAccessToken();
+
   return (
     <div className="App">
-      <NoteCard
-        archived={true}
-        body={"<p>asdad <strong>asdadssd</strong></p>"}
-        createdAt="2022-07-28T10:03:12.594Z"
-        id="adsfadfasdf"
-        owner="ferd"
-        title="okey go"
-        key="asdasda"
-      />
-      <RegisterCard />
-      <LoginCard />
-      <AddNote />
+      <Navigation />
+      {auth ? (
+        <Routes>
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      ) : (
+        <Routes>
+          <Route path="*" element={<LoginCard />} />
+          <Route path="/register" element={<RegisterCard />} />
+        </Routes>
+      )}
     </div>
   );
 }

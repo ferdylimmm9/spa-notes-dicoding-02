@@ -3,9 +3,16 @@ import * as React from "react";
 import LocaleContext from "../contexts/locale-context";
 
 export function LocaleProvider({ children }) {
-  const value = localStorage.getItem("locale");
-  const [locale, setLocale] = React.useState(value ? value : "id");
-  const localeHandler = () => setLocale(locale === "id" ? "en" : "id");
+  const [locale, setLocale] = React.useState(() =>
+    localStorage.getItem("locale") ? localStorage.getItem("locale") : "id"
+  );
+  const localeHandler = () => {
+    setLocale((prevLocale) => {
+      const newLocale = prevLocale === "id" ? "en" : "id";
+      localStorage.setItem("locale", newLocale);
+      return newLocale;
+    });
+  };
   const localeValue = React.useMemo(
     () => ({ locale, localeHandler }),
     [locale]

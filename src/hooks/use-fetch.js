@@ -7,18 +7,22 @@ export default function useFetch({ fetchFunction }) {
   const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
-    if (!data) {
-      setLoading(true);
-      fetchFunction()
-        .then((result) =>
-          result
-            .json()
-            .then((response) => setData(response))
-            .finally(() => setLoading(false))
-        )
-        .catch((error) => console.log(error));
+    async function fetchData() {
+      try {
+        if (!data) {
+          setLoading(true);
+          const response = await fetchFunction();
+          setData(response);
+        }
+      } catch (e) {
+        console.log(e);
+      } finally {
+        setLoading(false);
+      }
     }
+    fetchData();
   }, [data, loading]);
+
   return { data, loading };
 }
 

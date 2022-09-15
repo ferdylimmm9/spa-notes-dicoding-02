@@ -1,2 +1,2 @@
-export { default as PageNotFound } from "./page-404.json";
-export { default as Loading } from "./loading.json";
+export { default as LottieError } from "./page-404.json";
+export { default as LottieLoading } from "./loading.json";

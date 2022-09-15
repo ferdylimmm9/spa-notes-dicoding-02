@@ -1,7 +1,7 @@
 
 const BASE_URL = 'https://notes-api.dicoding.dev/v1';
 
-function getAccessToken() {
+export function getAccessToken() {
   return localStorage.getItem('accessToken');
 }
 
@@ -34,7 +34,7 @@ export async function login({ email, password }) {
     alert(responseJson.message);
     return { error: true, data: responseJson.message };
   }
-
+  putAccessToken(responseJson?.data?.accessToken)
   return { error: false, data: responseJson.data };
 }
 
