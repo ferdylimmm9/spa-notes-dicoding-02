@@ -1,6 +1,11 @@
 import { useLocale } from "../hooks/use-locale";
+import styles from "../styles/Button.module.css";
 
 export default function ButtonLocale() {
   const { locale, localeHandler } = useLocale();
-  return <button onClick={localeHandler}>{locale.toUpperCase()}</button>;
+  return (
+    <button className={styles.actionButton} onClick={localeHandler}>
+      {locale.toUpperCase()}
+    </button>
+  );
 }

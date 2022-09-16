@@ -1,0 +1,47 @@
+:root {
+  --font-color: #333;
+  --background-color: #eee;
+}
+[data-theme="dark"] {
+  --font-color: #eee;
+  --background-color: #333;
+}
+.navigationContainer {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.actionContainer {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+.linkContainer {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  justify-content: center;
+}
+.linkButton {
+  color: var(--font-color);
+  padding: 16px;
+  border-bottom: 2px solid var(--background-color);
+  transition: all 0.5s linear;
+}
+.linkButton:hover {
+  border-bottom: 2px solid;
+}
+
+@media screen and (min-width: 768px) {
+  .navigationContainer {
+    flex-direction: row;
+  }
+  .actionContainer {
+    justify-content: flex-start;
+  }
+  .linkContainer {
+    justify-content: flex-end;
+  }
+}

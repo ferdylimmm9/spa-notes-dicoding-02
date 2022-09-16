@@ -1,0 +1,50 @@
+:root {
+  --font-color: #333;
+  --background-color: #eee;
+}
+[data-theme="dark"] {
+  --font-color: #eee;
+  --background-color: #333;
+}
+.tabContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+}
+.tabNavigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid;
+}
+.tabTitle {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  padding: 10px 0px;
+  border-bottom: 3px solid transparent;
+  font-weight: bold;
+  transition: all 0.5s linear;
+  cursor: pointer;
+}
+.tabTitle:hover {
+  border-bottom: 3px solid var(--font-color);
+}
+
+.tabContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+}
+@media screen and (min-width: 768px) {
+  .tabContent {
+    justify-content: flex-start;
+    flex-direction: row;
+  }
+}

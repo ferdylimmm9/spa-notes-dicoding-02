@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import useFieldText from "../hooks/use-field-text";
 import { register } from "../utils/api";
 
@@ -6,8 +7,14 @@ export default function RegisterCard() {
   const [name, onChangeName] = useFieldText();
   const [email, onChangeEmail] = useFieldText();
   const [password, OnChangePassword] = useFieldText();
-  const [error, setError] = React.useState();
+  const [error, setError] = React.useState(true);
+  const navigate = useNavigate();
 
+  React.useEffect(() => {
+    if (!error) {
+      navigate("/login");
+    }
+  }, [error, navigate]);
   const onSubmit = async (event) => {
     event.preventDefault();
     const { error } = await register({ name, email, password });
@@ -16,7 +23,7 @@ export default function RegisterCard() {
 
   return (
     <form onSubmit={onSubmit}>
-      {error && <h2>email anda sudah terdaftar</h2>}
+      <h2>Register</h2>
       <input
         type="text"
         placeholder="masukkan nama anda..."

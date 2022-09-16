@@ -15,7 +15,6 @@ export default function useFetch({ fetchFunction }) {
           setData(response);
         }
       } catch (e) {
-        console.log(e);
       } finally {
         setLoading(false);
       }
