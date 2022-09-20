@@ -11,6 +11,7 @@ import { useLocale } from "../hooks/use-locale";
 import { localeData } from "../utils/locale";
 import { ToastContainer } from "react-toastify";
 import { useTheme } from "../hooks/use-theme";
+import { authPath, publicPath } from "../utils/route";
 
 export default function Navigation() {
   const { auth, setAuth } = useAuth();
@@ -36,16 +37,16 @@ export default function Navigation() {
           <AddNote onClose={hideHandler} />
         </DialogBackdrop>
       )}
-      <Link to="/" className={styles.linkButton}>
+      <Link to={authPath.index} className={styles.linkButton}>
         <h1>{localeData[locale].navigation_notes}</h1>
       </Link>
       <div className={styles.linkContainer}>
         {auth?.error ? (
           <>
-            <Link to="/login" className={styles.linkButton}>
+            <Link to={publicPath.login} className={styles.linkButton}>
               {localeData[locale].navigation_login}
             </Link>
-            <Link to="/register" className={styles.linkButton}>
+            <Link to={publicPath.register} className={styles.linkButton}>
               {localeData[locale].navigation_register}
             </Link>
           </>
@@ -55,7 +56,7 @@ export default function Navigation() {
               {localeData[locale].navigation_add_note}
             </a>
             <Link
-              to="/login"
+              to={publicPath.login}
               className={styles.linkButton}
               onClick={logoutHandler}
             >
