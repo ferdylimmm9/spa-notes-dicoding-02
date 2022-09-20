@@ -15,27 +15,19 @@ export default function RegisterCard() {
   const [email, onChangeEmail] = useFieldText();
   const [password, OnChangePassword] = useFieldText();
 
-  const [error, setError] = React.useState(true);
-
   const reset = React.useCallback(() => {
     onChangeEmail("");
     onChangeName("");
     OnChangePassword("");
   }, [OnChangePassword, onChangeEmail, onChangeName]);
 
-  React.useEffect(() => {
-    if (!error) {
-      navigate("/login");
-      reset();
-    }
-  }, [error, navigate, reset]);
-
   const onSubmit = async (event) => {
     event.preventDefault();
     const response = await register({ name, email, password });
-    setError(response.error);
     toast[response.error ? "error" : "success"](response.message, toastOptions);
     if (!response.error) {
+      navigate("/login");
+      reset();
     }
   };
 
