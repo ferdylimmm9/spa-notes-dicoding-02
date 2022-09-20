@@ -1,6 +1,4 @@
 import * as React from "react";
-import LoginCard from "./components/login-card";
-import RegisterCard from "./components/register-card";
 import { Routes, Route } from "react-router-dom";
 import PageNotFound from "./pages/note-found-page";
 import Navigation from "./components/navigation";
@@ -9,7 +7,9 @@ import Homepage from "./pages";
 import "./styles/style.module.css";
 import { useAuth } from "./hooks/use-auth";
 import "react-toastify/dist/ReactToastify.css";
-import { DetailPage } from "./pages/detail-page";
+import RegisterPage from "./pages/register-page";
+import { authPath, publicPath } from "./utils/route";
+import DetailPage from "./pages/detail-page";
 
 function App() {
   const { auth, loading } = useAuth();
@@ -21,15 +21,15 @@ function App() {
       <Navigation />
       {auth?.error ? (
         <Routes>
-          <Route path="/register" element={<RegisterCard />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="*" element={<LoginCard />} />
+          <Route path="*" element={<PageNotFound />} />
+          <Route path={publicPath.register} element={<RegisterPage />} />
+          <Route path={publicPath.login} element={<LoginPage />} />
         </Routes>
       ) : (
         <Routes>
           <Route path="*" element={<PageNotFound />} />
-          <Route path="/" element={<Homepage />} />
-          <Route path="/detail/:id" element={<DetailPage />} />
+          <Route path={authPath.index} element={<Homepage />} />
+          <Route path={`${authPath.detail}:id`} element={<DetailPage />} />
         </Routes>
       )}
     </div>

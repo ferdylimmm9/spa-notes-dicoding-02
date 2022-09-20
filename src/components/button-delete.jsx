@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import useToastOptions from "../hooks/use-toast-options";
 import { BsTrash } from "react-icons/bs";
 import Swal from "sweetalert2";
+import { authPath } from "../utils/route";
 export default function DeleteButton({ id }) {
   const { locale } = useLocale();
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ export default function DeleteButton({ id }) {
         toastOptions
       );
       if (!error) {
-        navigate("/");
+        navigate(authPath.index);
       }
     }
   };

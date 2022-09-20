@@ -2,6 +2,7 @@ import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../contexts/auth-context";
 import { getUserLogged } from "../utils/api";
+import { publicPath } from "../utils/route";
 
 export function AuthProvider({ children }) {
   const [auth, setAuth] = React.useState(null);
@@ -17,7 +18,7 @@ export function AuthProvider({ children }) {
         }
       } catch (e) {
         localStorage.removeItem("accessToken");
-        navigate("/login");
+        navigate(publicPath.login);
       } finally {
         setLoading(false);
       }

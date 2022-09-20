@@ -11,7 +11,8 @@ import { useLocale } from "../hooks/use-locale";
 import PageNotFound from "./note-found-page";
 import styles from "../styles/Detail.module.css";
 import BackButton from "../components/button-back";
-export function DetailPage() {
+
+export default function DetailPage() {
   const params = useParams();
   const locale = useLocale();
   const id = params?.id;

@@ -6,6 +6,7 @@ import { useLocale } from "../hooks/use-locale";
 import useToastOptions from "../hooks/use-toast-options";
 import { register } from "../utils/api";
 import { localeData } from "../utils/locale";
+import { publicPath } from "../utils/route";
 
 export default function RegisterCard() {
   const { locale } = useLocale();
@@ -15,19 +16,12 @@ export default function RegisterCard() {
   const [email, onChangeEmail] = useFieldText();
   const [password, OnChangePassword] = useFieldText();
 
-  const reset = React.useCallback(() => {
-    onChangeEmail("");
-    onChangeName("");
-    OnChangePassword("");
-  }, [OnChangePassword, onChangeEmail, onChangeName]);
-
   const onSubmit = async (event) => {
     event.preventDefault();
     const response = await register({ name, email, password });
     toast[response.error ? "error" : "success"](response.message, toastOptions);
     if (!response.error) {
-      navigate("/login");
-      reset();
+      navigate(publicPath.login);
     }
   };
 
@@ -53,6 +47,7 @@ export default function RegisterCard() {
         placeholder={localeData[locale].dialog_password_placeholder}
         value={password}
         onChange={OnChangePassword}
+        autoComplete="off"
         required
       />
       <input type="submit" value={localeData[locale].navigation_register} />

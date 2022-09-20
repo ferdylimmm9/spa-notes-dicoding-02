@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import useToastOptions from "../hooks/use-toast-options";
 import styles from "../styles/Navigation.module.css";
 import { BiArchiveOut } from "react-icons/bi";
+import { authPath } from "../utils/route";
 export default function UnarchiveButton({ id }) {
   const { locale } = useLocale();
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ export default function UnarchiveButton({ id }) {
       toastOptions
     );
     if (!error) {
-      navigate("/");
+      navigate(authPath.index);
     }
   };
 

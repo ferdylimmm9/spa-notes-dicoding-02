@@ -43,6 +43,7 @@ export default function LoginCard() {
         value={password}
         onChange={OnChangePassword}
         required
+        autoComplete="off"
       />
       <input type="submit" value={localeData[locale].navigation_login} />
     </form>

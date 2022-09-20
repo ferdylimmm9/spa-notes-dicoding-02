@@ -4,13 +4,14 @@ import { useLocale } from "../hooks/use-locale";
 import { formatDate } from "../utils/date";
 import styles from "../styles/Card.module.css";
 import { useNavigate } from "react-router-dom";
+import { authPath } from "../utils/route";
 export default function NoteCard({ id, title, body, createdAt, archived }) {
   const { locale } = useLocale();
   const navigate = useNavigate();
-  
+
   const date = formatDate({ date: createdAt, locale });
 
-  const onNavigate = () => navigate(`/detail/${id}`);
+  const onNavigate = () => navigate(`${authPath.detail}${id}`);
 
   return (
     <div className={styles.cardContainer} onClick={onNavigate}>

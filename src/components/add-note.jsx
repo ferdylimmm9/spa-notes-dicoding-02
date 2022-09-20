@@ -26,7 +26,7 @@ export function AddNote({ onClose }) {
   };
 
   return (
-    <div className={styles.dialogContent}>
+    <div className={styles.dialogContent} onClick={(e) => e.stopPropagation()}>
       <form onSubmit={onSubmit}>
         <input
           type="text"

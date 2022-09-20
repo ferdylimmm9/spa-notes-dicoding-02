@@ -3,17 +3,18 @@ import styles from "../styles/Dialog.module.css";
 import PropTypes from "prop-types";
 import { useLocale } from "../hooks/use-locale";
 import { localeData } from "../utils/locale";
+
 export function SearchForm({ onClose, onSearch }) {
   const { locale } = useLocale();
   const [title, onChangeTitle] = useFieldText();
 
   const onSubmit = (event) => {
     onSearch(title);
-    onClose();
+    onClose();  
   };
 
   return (
-    <div className={styles.dialogContent}>
+    <div className={styles.dialogContent} onClick={(e) => e.stopPropagation()}>
       <form onSubmit={onSubmit}>
         <input
           type="text"
@@ -21,7 +22,7 @@ export function SearchForm({ onClose, onSearch }) {
           value={title}
           onChange={onChangeTitle}
         />
-        <input type="submit" value={localeData[locale].navigation_add_note} />
+        <input type="submit" value={localeData[locale].dialog_search_title} />
       </form>
     </div>
   );
