@@ -21,7 +21,7 @@ function App() {
       <Navigation />
       {auth?.error ? (
         <Routes>
-          <Route path="*" element={<PageNotFound />} />
+          <Route path="*" element={<LoginPage />} />
           <Route path={publicPath.register} element={<RegisterPage />} />
           <Route path={publicPath.login} element={<LoginPage />} />
         </Routes>

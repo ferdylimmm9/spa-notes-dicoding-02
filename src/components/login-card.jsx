@@ -7,6 +7,7 @@ import { useLocale } from "../hooks/use-locale";
 import { localeData } from "../utils/locale";
 import { toast, ToastContainer } from "react-toastify";
 import useToastOptions from "../hooks/use-toast-options";
+import { authPath, publicPath } from "../utils/route";
 export default function LoginCard() {
   const { setAuth } = useAuth();
   const { locale } = useLocale();
@@ -21,8 +22,12 @@ export default function LoginCard() {
       event.preventDefault();
       const { data, error, message } = await login({ email, password });
       toast[error ? "error" : "success"](message, toastOptions);
-      setAuth({ data, error });
-      navigate("/");
+      if (!error) {
+        setAuth({ data });
+        navigate(authPath.index);
+      } else {
+        navigate(publicPath.login);
+      }
     } catch (e) {}
   };
 

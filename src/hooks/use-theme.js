@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import * as React from "react";
 import ThemeContext from "../contexts/theme-context";
+import PropTypes from "prop-types";
 
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = React.useState(
@@ -20,6 +21,10 @@ export function ThemeProvider({ children }) {
     <ThemeContext.Provider value={ThemeValue}>{children}</ThemeContext.Provider>
   );
 }
+
+ThemeProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export function useTheme() {
   const theme = React.useContext(ThemeContext);

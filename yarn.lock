@@ -7405,14 +7405,6 @@ react-app-polyfill@^3.0.0:
     regenerator-runtime "^0.13.9"
     whatwg-fetch "^3.6.2"
 
-react-awesome-reveal@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/react-awesome-reveal/-/react-awesome-reveal-4.0.1.tgz#7b1f6932bb7255965afcbae735fb4585ebf826ab"
-  integrity sha512-6DQg14rAhEXbMsWbKHxFJBThUi6dZhpc4YsaCcSdh4dhiDRwYuCnAeSZYnhdkbCURP5dBJukWhVzlJrCuq81Cg==
-  dependencies:
-    react-intersection-observer "^9.4.0"
-    react-is "^18.2.0"
-
 react-detect-click-outside@^1.1.7:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/react-detect-click-outside/-/react-detect-click-outside-1.1.7.tgz#8dd5766544475ab0d55084b3e2a35165e9a47854"
@@ -7466,11 +7458,6 @@ react-icons@^4.4.0:
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.4.0.tgz#a13a8a20c254854e1ec9aecef28a95cdf24ef703"
   integrity sha512-fSbvHeVYo/B5/L4VhB7sBA1i2tS8MkT0Hb9t2H1AVPkwGfVHLJCqyr2Py9dKMxsyM63Eng1GkdZfbWj+Fmv8Rg==
 
-react-intersection-observer@^9.4.0:
-  version "9.4.0"
-  resolved "https://registry.yarnpkg.com/react-intersection-observer/-/react-intersection-observer-9.4.0.tgz#f6b6e616e625f9bf255857c5cba9dbf7b1825ec7"
-  integrity sha512-v0403CmomOVlzhqFXlzOxg0ziLcVq8mfbP0AwAcEQWgZmR2OulOT79Ikznw4UlB3N+jlUYqLMe4SDHUOyp0t2A==
-
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
@@ -7481,7 +7468,7 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
-react-is@^18.0.0, react-is@^18.2.0:
+react-is@^18.0.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
