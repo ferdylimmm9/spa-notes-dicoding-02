@@ -27,19 +27,21 @@ export function DetailPage() {
   if (data?.data) {
     return (
       <div className={styles.container}>
-        <div className={styles.actionContainer}>
-          <BackButton />
-          <DeleteButton id={id} />
-        </div>
-
         <h2>{data.data.title}</h2>
         <p>{formatDate({ date: data.data.createdAt, locale })}</p>
-        <div dangerouslySetInnerHTML={{ __html: data.data.body }} />
+        <div
+          className={styles.content}
+          dangerouslySetInnerHTML={{ __html: data.data.body }}
+        />
         {data.data.archived ? (
           <UnarchiveButton id={id} />
         ) : (
           <ArchiveButton id={id} />
         )}
+        <div className={styles.actionContainer}>
+          <BackButton />
+          <DeleteButton id={id} />
+        </div>
       </div>
     );
   } else {
