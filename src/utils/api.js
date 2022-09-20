@@ -121,7 +121,6 @@ export async function getNote(id) {
 }
 
 export async function archiveNote(id) {
-  console.log(id);
   const response = await fetchWithToken(`${BASE_URL}/notes/${id}/archive`, {
     method: "POST",
   });
