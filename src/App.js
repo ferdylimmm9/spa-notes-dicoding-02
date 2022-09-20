@@ -8,6 +8,9 @@ import LoginPage from "./pages/login-page";
 import Homepage from "./pages";
 import "./styles/style.module.css";
 import { useAuth } from "./hooks/use-auth";
+import "react-toastify/dist/ReactToastify.css";
+import { DetailPage } from "./pages/detail-page";
+
 function App() {
   const { auth, loading } = useAuth();
   if (loading) {
@@ -26,6 +29,7 @@ function App() {
         <Routes>
           <Route path="*" element={<PageNotFound />} />
           <Route path="/" element={<Homepage />} />
+          <Route path="/detail/:id" element={<DetailPage />} />
         </Routes>
       )}
     </div>

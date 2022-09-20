@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 16px;
+}
+.actionContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.content {
+  text-align: justify;
+}

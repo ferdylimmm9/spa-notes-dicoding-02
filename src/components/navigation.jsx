@@ -1,43 +1,65 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import * as React from "react";
 import ButtonLocale from "./button-locale";
 import ButtonTheme from "./button-theme";
 import { Link } from "react-router-dom";
 import styles from "../styles/Navigation.module.css";
 import { useAuth } from "../hooks/use-auth";
+import DialogBackdrop from "./dialog-backdrop";
+import { AddNote } from "./add-note";
+import { useLocale } from "../hooks/use-locale";
+import { localeData } from "../utils/locale";
+import { ToastContainer } from "react-toastify";
+import { useTheme } from "../hooks/use-theme";
+
 export default function Navigation() {
   const { auth, setAuth } = useAuth();
+  const { locale } = useLocale();
+  const { theme } = useTheme();
+
+  const [hide, setHide] = React.useState(false);
+
+  const hideHandler = () => {
+    setHide((prevState) => !prevState);
+  };
   const logoutHandler = () => {
     localStorage.removeItem("accessToken");
     setAuth(null);
   };
+
   return (
     <nav className={styles.navigationContainer}>
-      <h1>Notes</h1>
+      <ToastContainer theme={theme} />
 
+      {hide && (
+        <DialogBackdrop onClose={hideHandler}>
+          <AddNote onClose={hideHandler} />
+        </DialogBackdrop>
+      )}
+      <Link to="/" className={styles.linkButton}>
+        <h1>{localeData[locale].navigation_notes}</h1>
+      </Link>
       <div className={styles.linkContainer}>
         {auth?.error ? (
           <>
             <Link to="/login" className={styles.linkButton}>
-              Login
+              {localeData[locale].navigation_login}
             </Link>
             <Link to="/register" className={styles.linkButton}>
-              Register
+              {localeData[locale].navigation_register}
             </Link>
           </>
         ) : (
           <>
-            <Link to="/" className={styles.linkButton}>
-              Daftar Catatan
-            </Link>
-            <Link to="/add" className={styles.linkButton}>
-              Tambah Catatan
-            </Link>
+            <a onClick={hideHandler} className={styles.linkButton}>
+              {localeData[locale].navigation_add_note}
+            </a>
             <Link
               to="/login"
               className={styles.linkButton}
               onClick={logoutHandler}
             >
-              Logout
+              {localeData[locale].navigation_logout}
             </Link>
           </>
         )}

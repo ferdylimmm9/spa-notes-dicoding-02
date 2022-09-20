@@ -1,51 +1,69 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import useFieldText from "../hooks/use-field-text";
+import { useLocale } from "../hooks/use-locale";
+import useToastOptions from "../hooks/use-toast-options";
 import { register } from "../utils/api";
+import { localeData } from "../utils/locale";
 
 export default function RegisterCard() {
+  const { locale } = useLocale();
+  const navigate = useNavigate();
+  const toastOptions = useToastOptions();
   const [name, onChangeName] = useFieldText();
   const [email, onChangeEmail] = useFieldText();
   const [password, OnChangePassword] = useFieldText();
+
   const [error, setError] = React.useState(true);
-  const navigate = useNavigate();
+
+  const reset = React.useCallback(() => {
+    onChangeEmail("");
+    onChangeName("");
+    OnChangePassword("");
+  }, [OnChangePassword, onChangeEmail, onChangeName]);
 
   React.useEffect(() => {
     if (!error) {
       navigate("/login");
+      reset();
     }
-  }, [error, navigate]);
+  }, [error, navigate, reset]);
+
   const onSubmit = async (event) => {
     event.preventDefault();
-    const { error } = await register({ name, email, password });
-    setError(error);
+    const response = await register({ name, email, password });
+    setError(response.error);
+    toast[response.error ? "error" : "success"](response.message, toastOptions);
+    if (!response.error) {
+    }
   };
 
   return (
     <form onSubmit={onSubmit}>
-      <h2>Register</h2>
+      <h2>{localeData[locale].navigation_register}</h2>
       <input
         type="text"
-        placeholder="masukkan nama anda..."
+        placeholder={localeData[locale].dialog_name_placeholder}
         value={name}
         onChange={onChangeName}
         required
       />
       <input
         type="email"
-        placeholder="masukkan email anda..."
+        placeholder={localeData[locale].dialog_email_placeholder}
         value={email}
         onChange={onChangeEmail}
         required
       />
       <input
         type="password"
-        placeholder="masukkan password anda..."
+        placeholder={localeData[locale].dialog_password_placeholder}
         value={password}
         onChange={OnChangePassword}
         required
       />
-      <input type="submit" value="register" />
+      <input type="submit" value={localeData[locale].navigation_register} />
     </form>
   );
 }

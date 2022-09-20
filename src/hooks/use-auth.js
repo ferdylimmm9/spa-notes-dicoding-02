@@ -1,10 +1,12 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import AuthContext from "../contexts/auth-context";
 import { getUserLogged } from "../utils/api";
 
 export function AuthProvider({ children }) {
   const [auth, setAuth] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
+  const navigate = useNavigate();
   React.useEffect(() => {
     async function fetchAuth() {
       try {
@@ -14,12 +16,14 @@ export function AuthProvider({ children }) {
           setAuth(response);
         }
       } catch (e) {
+        localStorage.removeItem("accessToken");
+        navigate("/login");
       } finally {
         setLoading(false);
       }
     }
     fetchAuth();
-  }, [auth, loading]);
+  }, [auth, loading, navigate]);
   const value = React.useMemo(
     () => ({ auth, loading, setAuth }),
     [auth, loading]

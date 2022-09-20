@@ -1,0 +1,24 @@
+:root {
+  --color: rgba(0, 0, 0, 0.24);
+}
+[data-theme="dark"] {
+  --color: rgba(255, 255, 255, 0.24);
+}
+.cardContainer {
+  display: flex;
+  gap: 8px;
+  padding: 16px;
+  box-shadow: var(--color) 0px 3px 8px;
+  transition: all 0.3s ease-in-out;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.cardContainer:hover {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.content {
+  text-align: justify;
+  overflow: auto;
+}

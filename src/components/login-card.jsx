@@ -3,43 +3,48 @@ import { useAuth } from "../hooks/use-auth";
 import useFieldText from "../hooks/use-field-text";
 import { login } from "../utils/api";
 import { useNavigate } from "react-router-dom";
+import { useLocale } from "../hooks/use-locale";
+import { localeData } from "../utils/locale";
+import { toast, ToastContainer } from "react-toastify";
+import useToastOptions from "../hooks/use-toast-options";
 export default function LoginCard() {
   const { setAuth } = useAuth();
+  const { locale } = useLocale();
   const navigate = useNavigate();
+  const toastOptions = useToastOptions();
+
   const [email, onChangeEmail] = useFieldText();
   const [password, OnChangePassword] = useFieldText();
-  const [data, setData] = React.useState({ error: false, message: "" });
+
   const onSubmit = async (event) => {
     try {
       event.preventDefault();
-      const { data, error } = await login({ email, password });
-      setData({ message: data, error });
+      const { data, error, message } = await login({ email, password });
+      toast[error ? "error" : "success"](message, toastOptions);
       setAuth({ data, error });
       navigate("/");
-    } catch (e) {
-    } finally {
-    }
+    } catch (e) {}
   };
 
   return (
     <form onSubmit={onSubmit}>
-      <h2>Login</h2>
+      <ToastContainer />
+      <h2>{localeData[locale].navigation_login}</h2>
       <input
         type="email"
-        placeholder="masukkan email anda..."
+        placeholder={localeData[locale].dialog_email_placeholder}
         value={email}
         onChange={onChangeEmail}
         required
       />
       <input
         type="password"
-        placeholder="masukkan password anda..."
+        placeholder={localeData[locale].dialog_password_placeholder}
         value={password}
         onChange={OnChangePassword}
         required
       />
-      {data.error && <h2>{data.message}</h2>}
-      <input type="submit" value="login" />
+      <input type="submit" value={localeData[locale].navigation_login} />
     </form>
   );
 }

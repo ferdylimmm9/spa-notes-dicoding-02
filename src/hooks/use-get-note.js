@@ -1,8 +1,9 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-import { getActiveNotes, getArchivedNotes } from "../utils/api";
+import { getNote } from "../utils/api";
 import { useAuth } from "./use-auth";
-export default function useGetNotes({ type }) {
+
+export default function useGetNote({ id }) {
   const { setAuth } = useAuth();
   const [data, setData] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
@@ -10,13 +11,8 @@ export default function useGetNotes({ type }) {
     async function fetchData() {
       try {
         setLoading(true);
-        if (type === "active") {
-          const response = await getActiveNotes();
-          setData(response);
-        } else {
-          const response = await getArchivedNotes();
-          setData(response);
-        }
+        const response = await getNote(id);
+        setData(response);
       } catch {
         setAuth(null);
       } finally {
@@ -24,9 +20,9 @@ export default function useGetNotes({ type }) {
       }
     }
     fetchData();
-  }, [type,setAuth]);
+  }, [id, setAuth]);
   return { data, loading };
 }
-useGetNotes.propTypes = {
-  type: PropTypes.string.isRequired,
+useGetNote.propTypes = {
+  id: PropTypes.string.isRequired,
 };
